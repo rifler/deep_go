@@ -24,7 +24,9 @@ func (b *COWBuffer) Clone() COWBuffer {
 }
 
 func (b *COWBuffer) Close() {
-	*b.refs--
+	if *b.refs > 0 {
+		*b.refs--
+	}
 }
 
 func (b *COWBuffer) Update(index int, value byte) bool {
