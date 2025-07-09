@@ -35,7 +35,7 @@ func (b *COWBuffer) Update(index int, value byte) bool {
 	}
 
 	if *b.refs > 1 {
-		*b.refs--
+		b.Close()
 
 		newData := make([]byte, len(b.data))
 		copy(newData, b.data)
